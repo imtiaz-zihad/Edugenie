@@ -17,7 +17,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center space-x-2">
           <motion.div 
             initial={{ rotate: 0 }} 
-            whileHover={{ rotate: 360 }} 
+            whileHover={{ rotate: 250 }} 
             transition={{ duration: 0.5 }}
           >
             <Image src="/Edugine-logo.png" alt="EduGenie Logo" width={40} height={40} />
