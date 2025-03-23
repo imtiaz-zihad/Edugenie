@@ -1,5 +1,4 @@
 "use client";
-
 import { motion } from "framer-motion";
 
 export default function HowItWorks() {
@@ -35,19 +34,22 @@ export default function HowItWorks() {
       id: 1,
       title: "Mastering AI in Education",
       author: "By Jane Doe",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPiTkIL31u1Jplh2A6kouDuCb5PtC4dSEJIQ&s",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPiTkIL31u1Jplh2A6kouDuCb5PtC4dSEJIQ&s",
     },
     {
       id: 2,
       title: "Top 10 Learning Hacks",
       author: "By John Smith",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtP3_BAREFiO-T45XAC620wiE6RWYAifoIg&s",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtP3_BAREFiO-T45XAC620wiE6RWYAifoIg&s",
     },
     {
       id: 3,
       title: "Why AI is the Future of Learning",
       author: "By Alex Brown",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQluAH3XJcELIidT_K1I9d2EWUNKL1WZXzw0w&s",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQluAH3XJcELIidT_K1I9d2EWUNKL1WZXzw0w&s",
     },
   ];
 
@@ -67,7 +69,6 @@ export default function HowItWorks() {
         {steps.map((step) => (
           <motion.div
             key={step.id}
-            className="bg-blue-100 shadow-md p-6 rounded-lg text-center"
             className="bg-yellow-400 shadow-md p-6 rounded-lg text-black text-center"
             whileHover={{ scale: 1.05 }}
           >

@@ -30,11 +30,15 @@ const StudentDashboard = () => {
 
   return (
     <div className="bg-gradient-to-r from-teal-50 to-teal-100 p-8 min-h-screen">
+      {/* Student Achievements Section */}
       <div className="mb-8">
         <h2 className="mb-6 font-bold text-teal-700 text-3xl">Student Achievements</h2>
         <div className="gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {badges.map((badge, index) => (
-            <div key={index} className="bg-gradient-to-r from-teal-200 to-teal-300 shadow-xl p-6 rounded-lg text-center hover:scale-105 transition-transform transform">
+            <div 
+              key={index} 
+              className="bg-gradient-to-r from-teal-200 to-teal-300 shadow-xl p-6 rounded-lg text-center hover:scale-105 transition-transform transform"
+            >
               <div className="text-5xl">{badge.icon}</div>
               <p className="mt-4 font-semibold text-teal-900">{badge.name}</p>
             </div>
@@ -42,6 +46,7 @@ const StudentDashboard = () => {
         </div>
       </div>
 
+      {/* Progress Leaderboard Section */}
       <div className="mb-8">
         <h2 className="mb-6 font-bold text-teal-700 text-3xl">Progress Leaderboard</h2>
         <div className="bg-white shadow-xl rounded-lg overflow-hidden">
@@ -66,11 +71,15 @@ const StudentDashboard = () => {
         </div>
       </div>
 
+      {/* Upcoming Webinars Section */}
       <div className="mb-8">
         <h2 className="mb-6 font-bold text-teal-700 text-3xl">Upcoming Webinars/Live Sessions</h2>
         <div className="space-y-6">
           {upcomingWebinars.map((webinar, index) => (
-            <div key={index} className="flex justify-between items-center bg-white shadow-xl p-6 rounded-lg hover:scale-105 transition-transform transform">
+            <div 
+              key={index} 
+              className="flex justify-between items-center bg-white shadow-xl p-6 rounded-lg hover:scale-105 transition-transform transform"
+            >
               <div>
                 <h3 className="font-semibold text-gray-800 text-xl">{webinar.title}</h3>
                 <p className="text-gray-600">{webinar.date} - {webinar.time}</p>
@@ -78,7 +87,9 @@ const StudentDashboard = () => {
               <button
                 onClick={() => handleRegister(webinar.title)}
                 disabled={registeredWebinars.includes(webinar.title)}
-                className={`bg-teal-600 ${registeredWebinars.includes(webinar.title) ? 'bg-teal-400 cursor-not-allowed' : 'hover:bg-teal-700'} shadow-md px-8 py-3 rounded-lg font-medium text-white hover:scale-105 transition-transform transform`}
+                aria-disabled={registeredWebinars.includes(webinar.title)}
+                className={`px-8 py-3 rounded-lg font-medium text-white shadow-md transition-transform transform hover:scale-105 
+                  ${registeredWebinars.includes(webinar.title) ? 'bg-teal-400 cursor-not-allowed' : 'bg-teal-600 hover:bg-teal-700'}`}
               >
                 {registeredWebinars.includes(webinar.title) ? 'Registered' : 'Register Now'}
               </button>
