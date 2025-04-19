@@ -29,63 +29,76 @@ const StudentDashboard = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-teal-50 to-teal-100 p-8 min-h-screen">
-      <div className="mb-8">
-        <h2 className="mb-6 font-bold text-teal-700 text-3xl">Student Achievements</h2>
+    <div className="bg-gradient-to-r from-gray-900 to-gray-800 py-8 px-8 md:px-20 min-h-screen text-white">
+      {/* Achievements Section */}
+      <section className="mb-8">
+        <h2 className="mb-6 font-bold text-purple-300 text-3xl">Student Achievements</h2>
         <div className="gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {badges.map((badge, index) => (
-            <div key={index} className="bg-gradient-to-r from-teal-200 to-teal-300 shadow-xl p-6 rounded-lg text-center hover:scale-105 transition-transform transform">
+            <div
+              key={index}
+              className="bg-gradient-to-r from-gray-700 to-gray-600 shadow-xl p-6 rounded-lg text-center hover:scale-105 transition-transform transform"
+            >
               <div className="text-5xl">{badge.icon}</div>
-              <p className="mt-4 font-semibold text-teal-900">{badge.name}</p>
+              <p className="mt-4 font-semibold text-purple-200">{badge.name}</p>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      <div className="mb-8">
-        <h2 className="mb-6 font-bold text-teal-700 text-3xl">Progress Leaderboard</h2>
-        <div className="bg-white shadow-xl rounded-lg overflow-hidden">
+      {/* Leaderboard Section */}
+      <section className="mb-8">
+        <h2 className="mb-6 font-bold text-purple-300 text-3xl">Progress Leaderboard</h2>
+        <div className="bg-gray-700 shadow-xl rounded-lg overflow-hidden">
           <table className="min-w-full text-left border-collapse">
             <thead>
-              <tr className="bg-teal-100">
-                <th className="px-6 py-4 text-teal-800">Rank</th>
-                <th className="px-6 py-4 text-teal-800">Name</th>
-                <th className="px-6 py-4 text-teal-800">Score</th>
+              <tr className="bg-gray-600">
+                <th className="px-6 py-4 text-purple-200">Rank</th>
+                <th className="px-6 py-4 text-purple-200">Name</th>
+                <th className="px-6 py-4 text-purple-200">Score</th>
               </tr>
             </thead>
             <tbody>
               {leaderboard.map((entry, index) => (
-                <tr key={index} className="hover:bg-teal-50 border-b">
-                  <td className="px-6 py-4 text-gray-800">{entry.rank}</td>
-                  <td className="px-6 py-4 text-gray-700">{entry.name}</td>
-                  <td className="px-6 py-4 font-semibold text-gray-900">{entry.score}</td>
+                <tr key={index} className="hover:bg-gray-600 border-b border-gray-500">
+                  <td className="px-6 py-4 text-gray-200">{entry.rank}</td>
+                  <td className="px-6 py-4 text-gray-300">{entry.name}</td>
+                  <td className="px-6 py-4 font-semibold text-gray-100">{entry.score}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      </div>
+      </section>
 
-      <div className="mb-8">
-        <h2 className="mb-6 font-bold text-teal-700 text-3xl">Upcoming Webinars/Live Sessions</h2>
+      {/* Upcoming Webinars Section */}
+      <section className="mb-8">
+        <h2 className="mb-6 font-bold text-purple-300 text-3xl">Upcoming Webinars/Live Sessions</h2>
         <div className="space-y-6">
           {upcomingWebinars.map((webinar, index) => (
-            <div key={index} className="flex justify-between items-center bg-white shadow-xl p-6 rounded-lg hover:scale-105 transition-transform transform">
+            <div
+              key={index}
+              className="flex justify-between items-center bg-gray-700 shadow-xl p-6 rounded-lg hover:scale-105 transition-transform transform"
+            >
               <div>
-                <h3 className="font-semibold text-gray-800 text-xl">{webinar.title}</h3>
-                <p className="text-gray-600">{webinar.date} - {webinar.time}</p>
+                <h3 className="font-semibold text-gray-200 text-xl">{webinar.title}</h3>
+                <p className="text-gray-300">{webinar.date} - {webinar.time}</p>
               </div>
               <button
                 onClick={() => handleRegister(webinar.title)}
                 disabled={registeredWebinars.includes(webinar.title)}
-                className={`bg-teal-600 ${registeredWebinars.includes(webinar.title) ? 'bg-teal-400 cursor-not-allowed' : 'hover:bg-teal-700'} shadow-md px-8 py-3 rounded-lg font-medium text-white hover:scale-105 transition-transform transform`}
+                className={`bg-purple-600 ${
+                  registeredWebinars.includes(webinar.title)
+                    ? 'bg-purple-400 cursor-not-allowed'
+                    : 'hover:bg-purple-700'
+                } shadow-md px-8 py-3 rounded-lg font-medium text-white hover:scale-105 transition-transform transform`}
               >
                 {registeredWebinars.includes(webinar.title) ? 'Registered' : 'Register Now'}
               </button>
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </div>
   );
 };
