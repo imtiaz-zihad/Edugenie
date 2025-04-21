@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -66,72 +66,89 @@ export default function CourseCarousel() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2500,
-    cssEase: "linear",
+    cssEase: "ease-in-out",
     responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
+      { breakpoint: 1024, settings: { slidesToShow: 2 } },
+      { breakpoint: 640, settings: { slidesToShow: 1 } },
     ],
   };
 
-  return (
-    <section className="py-16 bg-gray-100 text-center">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal-700 mb-8 px-4">
-        Explore Our Courses
-      </h2>
+  // Parallax effect
+  const { scrollY } = useScroll();
+  const translateY = useTransform(scrollY, [0, 300], [0, -100]);
 
-      {/* Category Filters */}
-      <div className="flex flex-col md:flex-row justify-center gap-2 sm:gap-4 mb-8 px-4">
+  return (
+    <section className="relative overflow-hidden py-24 bg-gradient-to-br from-sky-100 via-white to-cyan-100">
+      {/* Parallax Backgrounds */}
+      <motion.div
+        style={{ y: translateY }}
+        className="absolute top-0 left-0 w-full h-72 bg-gradient-to-br from-teal-300 to-cyan-500 opacity-10 z-0"
+      />
+      <motion.div
+        className="absolute top-24 right-10 w-40 h-40 bg-pink-300 rounded-full blur-3xl opacity-30 z-0"
+        animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
+        transition={{ duration: 8, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute bottom-10 left-10 w-48 h-48 bg-purple-300 rounded-full blur-3xl opacity-20 z-0"
+        animate={{ x: [0, 20, 0], y: [0, -20, 0] }}
+        transition={{ duration: 7, repeat: Infinity }}
+      />
+
+      {/* Section Title */}
+      <motion.h2
+        className="relative text-4xl sm:text-5xl font-extrabold text-center text-teal-700 mb-12 z-10 drop-shadow-lg"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        ✨ Discover Our Top Courses
+      </motion.h2>
+
+      {/* Category Filter Buttons */}
+      <div className="relative z-10 flex flex-wrap justify-center gap-2 md:gap-4 mb-12 px-4">
         {categories.map((category) => (
           <motion.button
             key={category}
-            className={`px-4 py-2 rounded-lg font-medium transition-all text-sm sm:text-base btn ${activeCategory === category
-                ? "bg-teal-600 text-white"
-                : "bg-gray-200 text-gray-800"
-              }`}
             onClick={() => setActiveCategory(category)}
             whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`px-4 py-2 rounded-full font-semibold text-sm sm:text-base backdrop-blur-md border transition-all shadow-md ${
+              activeCategory === category
+                ? "bg-teal-600 text-white border-teal-700"
+                : "bg-white text-gray-700 border-gray-300"
+            }`}
           >
             {category}
           </motion.button>
         ))}
       </div>
 
-      {/* Course Slider */}
-      <div className="max-w-6xl mx-auto px-4">
+      {/* Course Carousel */}
+      <div className="relative z-10 max-w-6xl mx-auto px-4">
         <Slider {...settings}>
           {filteredCourses.map((course) => (
             <motion.div
               key={course.id}
               className="px-2"
-              whileHover={{ scale: 1.03, y: -5 }}
+              whileHover={{ scale: 1.04, y: -8 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="relative group bg-white shadow-md rounded-2xl overflow-hidden border border-transparent hover:border-teal-600 transition duration-300">
-                {/* Category Badge */}
-                <span className="absolute top-2 left-2 bg-teal-600 text-white text-xs font-medium px-3 py-1 rounded-full z-10">
+              <div className="relative bg-white/70 backdrop-blur-md rounded-3xl overflow-hidden shadow-xl border border-white hover:border-teal-400 transition-all duration-300">
+                <span className="absolute top-3 left-3 bg-teal-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-10">
                   {course.category}
                 </span>
 
-                {/* Image with Zoom Effect */}
                 <motion.img
                   src={course.image}
                   alt={course.title}
-                  className="w-full h-40 md:h-48 object-cover transform transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-44 md:h-52 object-cover transition-transform duration-300 group-hover:scale-105"
                 />
 
-                {/* Course Info */}
-                <div className="p-4 space-y-2">
-                  <h3 className="text-lg font-semibold text-gray-800">{course.title}</h3>
+                <div className="p-5 space-y-2">
+                  <h3 className="text-lg font-bold text-gray-800 tracking-tight">
+                    {course.title}
+                  </h3>
                   <p className="text-yellow-500 text-sm">⭐ {course.rating}</p>
                 </div>
               </div>

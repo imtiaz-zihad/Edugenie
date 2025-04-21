@@ -7,117 +7,123 @@ export default function HowItWorks() {
   const steps = [
     {
       id: 1,
-      title: "Sign Up",
-      description: "Create your free EduGenie account in seconds.",
+      title: "Create Your Account",
+      description: "Sign up and unlock access to personalized AI-driven learning.",
       icon: "👤",
     },
     {
       id: 2,
-      title: "Select Your Course",
-      description: "Choose from AI-generated courses tailored to your needs.",
-      icon: "📚",
+      title: "Pick Your Path",
+      description: "Explore tailored courses based on your goals and interests.",
+      icon: "🧭",
     },
     {
       id: 3,
-      title: "Learn & Engage",
-      description: "Interact with AI-powered lessons and community discussions.",
-      icon: "🧠",
+      title: "Interactive Learning",
+      description: "Dive into lessons, quizzes, and discussions with our AI assistant.",
+      icon: "📖",
     },
     {
       id: 4,
-      title: "Achieve Your Goals",
-      description: "Track your progress and unlock new opportunities!",
-      icon: "🏆",
+      title: "Grow & Earn",
+      description: "Track progress, earn certificates, and achieve career goals.",
+      icon: "🌟",
     },
   ];
 
   const blogs = [
     {
       id: 1,
-      title: "Mastering AI in Education",
-      author: "By Jane Doe",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPiTkIL31u1Jplh2A6kouDuCb5PtC4dSEJIQ&s",
+      title: "The Future of AI in Education",
+      author: "Jane Doe",
+      image:
+        "https://i.ibb.co.com/Pdxvwzq/Wordpress-featured-images-3-1672727544811.jpg",
     },
     {
       id: 2,
-      title: "Top 10 Learning Hacks",
-      author: "By John Smith",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtP3_BAREFiO-T45XAC620wiE6RWYAifoIg&s",
+      title: "Design Thinking in Digital Classrooms",
+      author: "Mark Taylor",
+      image:
+        "https://i.ibb.co.com/G4ntT60t/3262010000-N10-hmchigh-e1708456253249.jpg",
     },
     {
       id: 3,
-      title: "Why AI is the Future of Learning",
-      author: "By Alex Brown",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQluAH3XJcELIidT_K1I9d2EWUNKL1WZXzw0w&s",
+      title: "How to Stay Focused While Studying Online",
+      author: "Alex Morgan",
+      image:
+        "https://i.ibb.co.com/Y7fd7HHW/Lackawanna-College-BLOG-How-Do-I-Stay-Focused-While-Studying-Helpful-Tips-and-Tricks-FINAL.webp",
     },
   ];
-
   return (
-    <section className="bg-white px-6 py-16">
-      {/* "How It Works" Section */}
+    <section className="bg-gradient-to-br from-[#f0f9ff] to-white px-4 py-20">
+      {/* How It Works Header */}
       <motion.h2
-        className="mb-10 font-bold text-gray-800 text-4xl text-center"
+        className="text-4xl sm:text-5xl font-extrabold text-center text-gray-800 mb-16"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.6 }}
       >
-        How It Works...!
+        How It Works
       </motion.h2>
 
-      <div className="gap-8 grid md:grid-cols-4 mx-auto max-w-6xl">
-        {steps.map((step) => (
+      {/* Vertical Steps Timeline */}
+      <div className="max-w-3xl mx-auto space-y-10 relative border-l-4 border-teal-500 pl-6">
+        {steps.map((step, index) => (
           <motion.div
             key={step.id}
-            className="p-6 bg-teal-500 text-black text-center rounded-lg shadow-md"
-
-
-            whileHover={{ scale: 1.05 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.2 }}
+            className="relative"
           >
-            <div className="text-5xl">{step.icon}</div>
-            <h3 className="mt-4 font-bold text-xl">{step.title}</h3>
-            <p className="mt-2 text-gray-600">{step.description}</p>
+            <div className="absolute -left-[34px] top-1 text-2xl bg-teal-500 text-white w-10 h-10 flex items-center justify-center rounded-full shadow-lg">
+              {step.icon}
+            </div>
+            <h3 className="text-xl  font-bold text-gray-800 pl-3  mb-1">{step.title}</h3>
+            <p className="text-gray-600 pl-2">{step.description}</p>
           </motion.div>
         ))}
       </div>
 
-      {/* Blog Showcase Section */}
+      {/* Blogs Header */}
       <motion.h2
-        className="mt-20 mb-10 font-bold text-gray-800 text-4xl text-center"
+        className="text-4xl sm:text-5xl font-extrabold text-center text-gray-800 mt-28 mb-16"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.6 }}
       >
-        Featured Blogs
+         📚 Featured Blog 
       </motion.h2>
 
-      <div className="gap-8 grid md:grid-cols-3 mx-auto max-w-6xl">
+      {/* Blog Grid */}
+      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {blogs.map((blog) => (
           <motion.div
             key={blog.id}
-            className="bg-white shadow-lg rounded-lg overflow-hidden"
-            whileHover={{ scale: 1.05 }}
+            className="relative group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300"
+            whileHover={{ scale: 1.02 }}
           >
             <img
               src={blog.image}
               alt={blog.title}
-              className="w-full h-48 object-cover"
+              className="w-full h-64 object-cover group-hover:brightness-75 transition duration-300"
             />
-            <div className="p-4">
-              <h3 className="font-bold text-lg">{blog.title}</h3>
-              <p className="text-gray-600">{blog.author}</p>
+            <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 to-transparent px-5 py-6">
+              <h3 className="text-lg font-semibold text-white">{blog.title}</h3>
+              <p className="text-sm text-gray-300">{blog.author}</p>
             </div>
           </motion.div>
         ))}
       </div>
 
-      {/* Write a Blog Button */}
-      <div className="mt-12 text-center">
+      {/* Blog Button */}
+      <div className="mt-16 text-center">
         <Link href="/blogs">
           <motion.button
-            className="bg-teal-500 btn hover:bg-teal-700 px-4 py-6 rounded-lg font-bold text-black transition-all"
             whileHover={{ scale: 1.05 }}
+            className="px-8 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full shadow-md transition-all"
           >
-            Write a Blog ✍️
+            Explore All Blogs ✨
           </motion.button>
         </Link>
       </div>

@@ -2,7 +2,7 @@ import Chatbot from "./Chatbot";
 
 const Chat = () => {
     return (
-        <div className="bg-white p-8 rounded-2xl shadow-xl max-w-2xl mx-auto mb-12 border border-teal-200 w-full text-center">
+        <div className= "hidden md:block bg-white p-8 rounded-2xl shadow-xl max-w-2xl mx-auto mb-12 border border-teal-200 w-full text-center">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">
                 How can we help you today?
             </h2>

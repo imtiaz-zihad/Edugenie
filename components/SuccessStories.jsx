@@ -90,7 +90,7 @@ export default function SuccessStories() {
           
           {/* Chat Bubble */}
           <motion.div
-            className="bg-yellow-400 text-gray-900 p-3 rounded-lg mt-4 inline-block text-left text-sm sm:text-base"
+            className="bg-teal-500 text-gray-900 p-3 rounded-lg mt-4 inline-block text-left text-sm sm:text-base"
             whileHover={{ scale: 1.05 }}
           >
             <p>📢 "How can I help you learn today?"</p>
@@ -103,7 +103,7 @@ export default function SuccessStories() {
               placeholder="Ask something..."
               className="w-full p-2 text-sm sm:text-base outline-none"
             />
-            <button className="bg-yellow-400 text-gray-900 px-4 text-sm sm:text-base">➤</button>
+            <button className="bg-teal-500 text-gray-900 px-4 text-sm sm:text-base">➤</button>
           </div>
         </motion.div>
       </div>
