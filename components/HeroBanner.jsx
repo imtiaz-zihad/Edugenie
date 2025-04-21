@@ -31,7 +31,7 @@ export default function HeroBanner() {
   ];
 
   return (
-    <section className="relative flex flex-col items-center justify-center pb-28 pt-32 bg-gradient-to-br from-teal-500 via-cyan-600 to-teal-900 text-white text-center px-6 md:px-12 lg:px-24 overflow-hidden">
+    <section className="relative flex flex-col items-center justify-center pb-28 bg-gradient-to-br from-teal-500 via-cyan-600 to-teal-900 text-white text-center px-6 md:px-12 lg:px-24 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 -z-10">
         <Image
@@ -77,14 +77,12 @@ export default function HeroBanner() {
           Revolutionizing learning with AI-powered course generation.
         </motion.p>
 
-       
         <motion.button
           className="px-6 sm:px-8 py-3 bg-yellow-400 text-gray-900 rounded-lg font-bold hover:bg-yellow-500 transition-all shadow-xl hover:scale-105"
           whileHover={{ scale: 1.05 }}
         >
           Get Started
         </motion.button>
-        
       </div>
 
       {/* Feature Slider */}
