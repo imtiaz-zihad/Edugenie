@@ -77,12 +77,12 @@ export default function HeroBanner() {
           Revolutionizing learning with AI-powered course generation.
         </motion.p>
 
-        <motion.button
+        {/* <motion.button
           className="px-6 sm:px-8 py-3 bg-yellow-400 text-gray-900 rounded-lg font-bold hover:bg-yellow-500 transition-all shadow-xl hover:scale-105"
           whileHover={{ scale: 1.05 }}
         >
           Get Started
-        </motion.button>
+        </motion.button> */}
       </div>
 
       {/* Feature Slider */}
