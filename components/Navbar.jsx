@@ -25,7 +25,7 @@ export default function Navbar() {
       ? [...staticMenuItems.slice(0, 2), "Dashboard", ...staticMenuItems.slice(2)]
       : staticMenuItems;
 
-  const getRoute = (item) => {
+  const getRoute = (item: string) => {
     switch (item) {
       case "Home":
         return "/";
@@ -107,7 +107,7 @@ export default function Navbar() {
             </div>
           )}
 
-          {/* Search Bar */}
+          {/* Search */}
           <input
             type="text"
             placeholder="Search..."
