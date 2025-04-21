@@ -12,8 +12,9 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { data: session, status } = useSession();
-  const userRole = session?.user?.role;
   const router = useRouter();
+
+  const userRole = session?.user?.role;
 
   useEffect(() => {
     setIsClient(true);
@@ -26,7 +27,7 @@ export default function Navbar() {
       ? [...staticMenuItems.slice(0, 2), "Dashboard", ...staticMenuItems.slice(2)]
       : staticMenuItems;
 
-  const getRoute = (item: string) => {
+  const getRoute = (item) => {
     switch (item) {
       case "Home":
         return "/";
@@ -67,7 +68,7 @@ export default function Navbar() {
           <span className="text-2xl font-bold text-teal-600 dark:text-white">EduGenie</span>
         </Link>
 
-        {/* Right Side (Desktop) */}
+        {/* Right Side - Desktop */}
         <div className="hidden md:flex items-center space-x-6">
           {menuItems.map((item, index) => (
             <Link
@@ -80,16 +81,19 @@ export default function Navbar() {
             </Link>
           ))}
 
+          {/* Search */}
           <input
             type="text"
             placeholder="Search..."
             className="px-3 py-1 rounded-md border dark:bg-gray-800 dark:border-gray-700 dark:text-white text-sm focus:outline-teal-500"
           />
 
+          {/* Notification */}
           <button className="text-gray-600 dark:text-gray-300 hover:text-teal-500">
             <Bell size={20} />
           </button>
 
+          {/* Authenticated or Login */}
           {status === "authenticated" ? (
             <div className="flex items-center space-x-3">
               <div className="relative group">
@@ -121,7 +125,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Toggle */}
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden"
@@ -131,7 +135,7 @@ export default function Navbar() {
         </motion.button>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Dropdown */}
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -159,6 +163,7 @@ export default function Navbar() {
             <button className="text-gray-600 dark:text-gray-300 hover:text-teal-500">
               <Bell size={20} />
             </button>
+
             {status === "authenticated" ? (
               <div className="flex items-center space-x-3 pt-2">
                 <div className="relative group">
