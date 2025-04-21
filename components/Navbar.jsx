@@ -20,10 +20,7 @@ export default function Navbar() {
   }, []);
 
   const staticMenuItems = ["Home", "Courses", "Blogs", "Contact"];
-  const menuItems =
-    status === "authenticated"
-      ? [...staticMenuItems.slice(0, 2), "Dashboard", ...staticMenuItems.slice(2)]
-      : staticMenuItems;
+  const menuItems = staticMenuItems;
 
   const getRoute = (item: string) => {
     switch (item) {
@@ -31,10 +28,6 @@ export default function Navbar() {
         return "/";
       case "Courses":
         return "/courses";
-      case "Dashboard":
-        return userRole === "educator"
-          ? "/dashboard/educatorHome"
-          : "/dashboard/studentHome";
       case "Blogs":
         return "/blogs";
       case "Contact":
@@ -54,8 +47,7 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 left-0 w-full bg-white dark:bg-gray-900 shadow z-50 transition-all">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-
-        {/* Logo & Brand Name */}
+        {/* Logo & Brand */}
         <Link href="/" className="flex items-center space-x-2">
           <motion.div
             initial={{ rotate: 0 }}
@@ -67,7 +59,7 @@ export default function Navbar() {
           <span className="text-2xl font-bold text-teal-600 dark:text-white">EduGenie</span>
         </Link>
 
-        {/* Right Side (Desktop) */}
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-6">
           {menuItems.map((item, index) => (
             <Link
@@ -80,41 +72,28 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {/* Dashboard Dropdown */}
+          {/* Conditional Dashboard Link */}
           {status === "authenticated" && userRole && (
-            <div className="relative group cursor-pointer">
-              <span className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition">
-                Dashboard
-              </span>
-              <div className="absolute top-full mt-2 w-56 bg-white dark:bg-gray-800 shadow-md rounded-md p-2 hidden group-hover:block z-50">
-                {userRole === "educator" && (
-                  <Link
-                    href="/dashboard/educatorHome"
-                    className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
-                  >
-                    Educator Panel
-                  </Link>
-                )}
-                {userRole === "student" && (
-                  <Link
-                    href="/dashboard/studentHome"
-                    className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
-                  >
-                    Student Panel
-                  </Link>
-                )}
-              </div>
-            </div>
+            <Link
+              href={
+                userRole === "educator"
+                  ? "/dashboard/educatorHome"
+                  : "/dashboard/studentHome"
+              }
+              className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition-colors"
+            >
+              Dashboard
+            </Link>
           )}
 
-          {/* Search */}
+          {/* Search Input */}
           <input
             type="text"
             placeholder="Search..."
             className="px-3 py-1 rounded-md border dark:bg-gray-800 dark:border-gray-700 dark:text-white text-sm focus:outline-teal-500"
           />
 
-          {/* Bell Icon */}
+          {/* Notification Bell */}
           <button className="text-gray-600 dark:text-gray-300 hover:text-teal-500">
             <Bell size={20} />
           </button>
@@ -151,7 +130,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Toggle */}
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden"
@@ -179,6 +158,21 @@ export default function Navbar() {
               {item}
             </Link>
           ))}
+
+          {/* Dashboard Link for Mobile */}
+          {status === "authenticated" && userRole && (
+            <Link
+              href={
+                userRole === "educator"
+                  ? "/dashboard/educatorHome"
+                  : "/dashboard/studentHome"
+              }
+              onClick={() => setIsOpen(false)}
+              className="block text-gray-800 dark:text-gray-300 hover:text-teal-600 transition"
+            >
+              Dashboard
+            </Link>
+          )}
 
           <div className="pt-4 space-y-3">
             <input
