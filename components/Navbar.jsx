@@ -12,6 +12,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { data: session, status } = useSession();
+  const userRole = session?.user?.role;
   const router = useRouter();
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function Navbar() {
       case "Courses":
         return "/courses";
       case "Dashboard":
-        return session?.user?.role === "educator"
+        return userRole === "educator"
           ? "/dashboard/educatorHome"
           : "/dashboard/studentHome";
       case "Blogs":
@@ -79,7 +80,34 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {/* Search */}
+          {/* Dashboard Dropdown */}
+          {status === "authenticated" && userRole && (
+            <div className="relative group cursor-pointer">
+              <span className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition">
+                Dashboard
+              </span>
+              <div className="absolute top-full mt-2 w-56 bg-white dark:bg-gray-800 shadow-md rounded-md p-2 hidden group-hover:block z-50">
+                {userRole === "educator" && (
+                  <Link
+                    href="/dashboard/educatorHome"
+                    className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                  >
+                    Educator Panel
+                  </Link>
+                )}
+                {userRole === "student" && (
+                  <Link
+                    href="/dashboard/studentHome"
+                    className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                  >
+                    Student Panel
+                  </Link>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Search Bar */}
           <input
             type="text"
             placeholder="Search..."
@@ -194,6 +222,6 @@ export default function Navbar() {
           </div>
         </motion.div>
       )}
-    </nav>
-  );
+    </nav>
+  );
 }
