@@ -21,13 +21,12 @@ export default function Navbar() {
   }, []);
 
   const staticMenuItems = ["Home", "Courses", "Blogs", "Contact"];
-
   const menuItems =
     status === "authenticated"
       ? [...staticMenuItems.slice(0, 2), "Dashboard", ...staticMenuItems.slice(2)]
       : staticMenuItems;
 
-  const getRoute = (item) => {
+  const getRoute = (item: string) => {
     switch (item) {
       case "Home":
         return "/";
@@ -135,7 +134,7 @@ export default function Navbar() {
         </motion.button>
       </div>
 
-      {/* Mobile Dropdown */}
+      {/* Mobile Dropdown Menu */}
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
