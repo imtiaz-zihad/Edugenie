@@ -20,7 +20,11 @@ export default function Navbar() {
   }, []);
 
   const staticMenuItems = ["Home", "Courses", "Blogs", "Contact"];
-  const menuItems = staticMenuItems;
+
+  const menuItems =
+    status === "authenticated"
+      ? [...staticMenuItems.slice(0, 2), "Dashboard", ...staticMenuItems.slice(2)]
+      : staticMenuItems;
 
   const getRoute = (item: string) => {
     switch (item) {
@@ -28,6 +32,10 @@ export default function Navbar() {
         return "/";
       case "Courses":
         return "/courses";
+      case "Dashboard":
+        return userRole === "educator"
+          ? "/dashboard/educatorHome"
+          : "/dashboard/studentHome";
       case "Blogs":
         return "/blogs";
       case "Contact":
@@ -59,7 +67,7 @@ export default function Navbar() {
           <span className="text-2xl font-bold text-teal-600 dark:text-white">EduGenie</span>
         </Link>
 
-        {/* Desktop Menu */}
+        {/* Right Side (Desktop) */}
         <div className="hidden md:flex items-center space-x-6">
           {menuItems.map((item, index) => (
             <Link
@@ -72,33 +80,16 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {/* Conditional Dashboard Link */}
-          {status === "authenticated" && userRole && (
-            <Link
-              href={
-                userRole === "educator"
-                  ? "/dashboard/educatorHome"
-                  : "/dashboard/studentHome"
-              }
-              className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition-colors"
-            >
-              Dashboard
-            </Link>
-          )}
-
-          {/* Search Input */}
           <input
             type="text"
             placeholder="Search..."
             className="px-3 py-1 rounded-md border dark:bg-gray-800 dark:border-gray-700 dark:text-white text-sm focus:outline-teal-500"
           />
 
-          {/* Notification Bell */}
           <button className="text-gray-600 dark:text-gray-300 hover:text-teal-500">
             <Bell size={20} />
           </button>
 
-          {/* Auth Section */}
           {status === "authenticated" ? (
             <div className="flex items-center space-x-3">
               <div className="relative group">
@@ -130,7 +121,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Toggle */}
+        {/* Mobile Menu Toggle */}
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden"
@@ -158,21 +149,6 @@ export default function Navbar() {
               {item}
             </Link>
           ))}
-
-          {/* Dashboard Link for Mobile */}
-          {status === "authenticated" && userRole && (
-            <Link
-              href={
-                userRole === "educator"
-                  ? "/dashboard/educatorHome"
-                  : "/dashboard/studentHome"
-              }
-              onClick={() => setIsOpen(false)}
-              className="block text-gray-800 dark:text-gray-300 hover:text-teal-600 transition"
-            >
-              Dashboard
-            </Link>
-          )}
 
           <div className="pt-4 space-y-3">
             <input
